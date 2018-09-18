@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -57,6 +58,7 @@ class EventPastLeagueFragment : Fragment(), EventPastLeagueView {
 
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         rvPastEvent.layoutManager = linearLayoutManager
+        rvPastEvent.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
         adapter = EventPastLeagueAdapter(datas,{
             Toast.makeText(activity, it.dateEvent, Toast.LENGTH_SHORT).show()
         })
