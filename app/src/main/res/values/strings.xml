@@ -23,6 +23,8 @@
     <string name="message_favourite_remove_success">Berhasil menghapus event dari favourite</string>
     <string name="overview">Overview</string>
     <string name="player">Player</string>
+    <string name="weight_header">Weight (KG)</string>
+    <string name="height_header">Height (m)</string>
 
 
     <array name="league">

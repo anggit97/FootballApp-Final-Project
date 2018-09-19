@@ -8,6 +8,7 @@ import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPast
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPastLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.player.PlayerResponse
 import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
+import com.kotlinje.submit2.model.detail_player.ResponseDetailPlayer
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -38,6 +39,8 @@ interface RetrofitEndpoint {
      */
     @GET("api/v1/json/1/lookup_all_players.php")
     fun getTeamPlayer(@Query("id") idTeam:String?): Call<PlayerResponse>
+    @GET("api/v1/json/1/lookupplayer.php")
+    fun getDetailPlayer(@Query("id") idTeam:String?): Call<ResponseDetailPlayer>
 
 
 //    @GET("api/v1/json/1/searchevents.php")

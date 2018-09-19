@@ -1,7 +1,5 @@
 package com.anggitprayogo.footballapp.fotballapp.feature.detailteamplayer
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -14,10 +12,14 @@ import android.view.ViewGroup
 
 import com.anggitprayogo.footballapp.fotballapp.R
 import com.anggitprayogo.footballapp.fotballapp.adapter.PlayerAdapter
+import com.anggitprayogo.footballapp.fotballapp.config.Config
+import com.anggitprayogo.footballapp.fotballapp.feature.detailplayer.DetailPlayerActivity
 import com.anggitprayogo.footballapp.fotballapp.feature.detailteamoverview.OverviewFragment
 import com.anggitprayogo.footballapp.fotballapp.model.player.Player
 import com.anggitprayogo.footballapp.fotballapp.model.player.PlayerResponse
 import com.anggitprayogo.footballapp.fotballapp.network.repository.MatchRepository
+import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 
 class PlayerFragment : Fragment(), PlayerView {
@@ -48,14 +50,18 @@ class PlayerFragment : Fragment(), PlayerView {
 
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-        adapter = PlayerAdapter(datas, {
-
-        })
+        adapter = PlayerAdapter(datas) {
+            startActivity<DetailPlayerActivity>(
+                    Config.LEAGUE_ID to it.idPlayer
+            )
+        }
         recyclerView.adapter = adapter
 
         presenter = PlayerPresenter(this, MatchRepository())
 
         presenter.getPlayer(mParam1!!)
+
+        toast(mParam1!!)
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
@@ -93,8 +99,8 @@ class PlayerFragment : Fragment(), PlayerView {
         val ARG_PARAM1 = "param1"
         val ARG_PARAM2 = "param2"
 
-        fun newInstance(param1: String, param2: String): OverviewFragment {
-            val fragment = OverviewFragment()
+        fun newInstance(param1: String, param2: String): PlayerFragment {
+            val fragment = PlayerFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             args.putString(ARG_PARAM2, param2)

@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".feature.detaileventleague.DetailEventLeagueActivity" />
-        <activity android:name=".feature.detailteam.DetailTeamActivity"></activity>
+        <activity android:name=".feature.detailteam.DetailTeamActivity" />
+        <activity android:name=".feature.detailplayer.DetailPlayerActivity"></activity>
     </application>
 
 </manifest>

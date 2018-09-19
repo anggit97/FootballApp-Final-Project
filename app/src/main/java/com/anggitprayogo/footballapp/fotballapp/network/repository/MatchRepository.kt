@@ -10,6 +10,7 @@ import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
 import com.anggitprayogo.footballapp.fotballapp.network.retrofit.RetrofitEndpoint
 import com.anggitprayogo.footballapp.fotballapp.network.retrofit.RetrofitService
 import com.google.gson.GsonBuilder
+import com.kotlinje.submit2.model.detail_player.ResponseDetailPlayer
 import retrofit2.Call
 import retrofit2.Response
 
@@ -146,6 +147,27 @@ class MatchRepository {
                     }
 
                     override fun onResponse(call: Call<PlayerResponse>?, response: Response<PlayerResponse>?) {
+                        if (response!!.isSuccessful){
+                            Log.d("PLAYER : ", GsonBuilder().setPrettyPrinting().create().toJson(response.body()))
+                            callback.onDataLoaded(response.body()!!)
+                        }else{
+                            callback.onDataError()
+                        }
+                    }
+
+                })
+    }
+
+    fun getDetailPlaye(id: String, callback: DetailPlayerCallback<ResponseDetailPlayer>){
+
+        RetrofitService.createService(RetrofitEndpoint::class.java)
+                .getDetailPlayer(id)
+                .enqueue(object: retrofit2.Callback<ResponseDetailPlayer>{
+                    override fun onFailure(call: Call<ResponseDetailPlayer>?, t: Throwable?) {
+                        callback.onDataError()
+                    }
+
+                    override fun onResponse(call: Call<ResponseDetailPlayer>?, response: Response<ResponseDetailPlayer>?) {
                         if (response!!.isSuccessful){
                             Log.d("PLAYER : ", GsonBuilder().setPrettyPrinting().create().toJson(response.body()))
                             callback.onDataLoaded(response.body()!!)
