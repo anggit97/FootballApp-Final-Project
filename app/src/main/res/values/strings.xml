@@ -10,6 +10,13 @@
     <string name="next_match">Next Match</string>
     <string name="ex_vs">VS</string>
     <string name="club">Club</string>
+    <string name="goals">GOALS</string>
+    <string name="shots">SHOTS</string>
+    <string name="formation_not_found">Formasi tidak ada</string>
+    <string name="line_up">Line Up</string>
+    <string name="goalskeeper">Goalkeeper</string>
+    <string name="deffense">Defense</string>
+    <string name="midfield">Midfield</string>
 
 
     <array name="league">

@@ -1,5 +1,7 @@
 package com.anggitprayogo.footballapp.fotballapp.network.retrofit
 
+import com.anggitprayogo.footballapp.fotballapp.model.detailevents.DetailEventLeagueResponse
+import com.anggitprayogo.footballapp.fotballapp.model.detailteams.DetailTeamResponse
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNext
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNextLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPast
@@ -18,6 +20,8 @@ interface RetrofitEndpoint {
     fun getPastMatch(@Query("id")league:String): Call<EventPastLeagueResponse>
     @GET("api/v1/json/1/eventsnextleague.php")
     fun getNextMatch(@Query("id")leagueId:String): Call<EventNextLeagueResponse>
+    @GET("api/v1/json/1/lookupevent.php")
+    fun getDetailMatch(@Query("id")id: String): Call<DetailEventLeagueResponse>
 
 
     /**
@@ -25,6 +29,8 @@ interface RetrofitEndpoint {
      */
     @GET("api/v1/json/1/search_all_teams.php")
     fun getTeams(@Query("l") league: String?): Call<TeamResponse>
+    @GET("api/v1/json/1/lookupteam.php")
+    fun getDetailTeam(@Query("id") id: String?): Call<DetailTeamResponse>
 
 //    @GET("api/v1/json/1/searchevents.php")
 //    fun getListSearch(@Query("e")e:String): Call<ResponseSearch>

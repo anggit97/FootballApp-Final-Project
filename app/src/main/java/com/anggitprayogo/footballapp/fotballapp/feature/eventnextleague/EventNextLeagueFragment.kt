@@ -20,11 +20,14 @@ import android.widget.Toast
 import com.anggitprayogo.footballapp.fotballapp.R
 import com.anggitprayogo.footballapp.fotballapp.adapter.EventNextLeagueAdapter
 import com.anggitprayogo.footballapp.fotballapp.adapter.EventPastLeagueAdapter
+import com.anggitprayogo.footballapp.fotballapp.config.Config
+import com.anggitprayogo.footballapp.fotballapp.feature.detaileventleague.DetailEventLeagueActivity
 import com.anggitprayogo.footballapp.fotballapp.feature.eventpastleague.EventPastLeaguePresenter
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNext
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNextLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.network.repository.MatchRepository
 import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.startActivity
 
 class EventNextLeagueFragment : Fragment(), EventNextLeagueView {
 
@@ -60,7 +63,9 @@ class EventNextLeagueFragment : Fragment(), EventNextLeagueView {
         rvLeague.layoutManager = linearLayoutManager
         rvLeague.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
         adapter = EventNextLeagueAdapter(datas,{
-            Toast.makeText(activity, it.dateEvent, Toast.LENGTH_SHORT).show()
+            startActivity<DetailEventLeagueActivity>(
+                    Config.LEAGUE_ID to it.idEvent
+            )
         })
         rvLeague.adapter = adapter
 

@@ -1,6 +1,8 @@
 package com.anggitprayogo.footballapp.fotballapp.network.repository
 
 import android.util.Log
+import com.anggitprayogo.footballapp.fotballapp.model.detailevents.DetailEventLeagueResponse
+import com.anggitprayogo.footballapp.fotballapp.model.detailteams.DetailTeamResponse
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNextLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPastLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
@@ -56,6 +58,34 @@ class MatchRepository {
                 })
     }
 
+    fun getDetailMatch(id: String, callback: DetailEventLeagueCallback<DetailEventLeagueResponse>){
+
+        RetrofitService.createService(RetrofitEndpoint::class.java)
+                .getDetailMatch(id)
+                .enqueue(object : retrofit2.Callback<DetailEventLeagueResponse>{
+                    override fun onFailure(call: Call<DetailEventLeagueResponse>?, t: Throwable?) {
+                        Log.d("FAILURE ", t?.message)
+                        callback.onDataError()
+
+                    }
+
+                    override fun onResponse(call: Call<DetailEventLeagueResponse>?, response: Response<DetailEventLeagueResponse>?) {
+                        if (response!!.isSuccessful) {
+                            Log.d("DETAIL MATCH ", GsonBuilder().setPrettyPrinting().create().toJson(response.body()))
+
+                            callback.onDataLoaded(response.body()!!)
+
+                        }else{
+
+                            Log.d("FAILURE GAGAL", "GAGAL")
+                            callback.onDataError()
+
+                        }
+                    }
+
+                })
+    }
+
 
     fun getTeams(id: String, callback: TeamCallback<TeamResponse>){
 
@@ -63,6 +93,7 @@ class MatchRepository {
                 .getTeams(id)
                 .enqueue(object: retrofit2.Callback<TeamResponse>{
                     override fun onFailure(call: Call<TeamResponse>?, t: Throwable?) {
+                        Log.d("FAILURE ", t?.message)
                         callback.onDataError()
                     }
 
@@ -79,6 +110,28 @@ class MatchRepository {
                     }
 
                 })
+    }
+
+    fun getDetailTeam(id: String, callback: DetailTeamCallback<DetailTeamResponse>){
+
+        RetrofitService.createService(RetrofitEndpoint::class.java)
+                .getDetailTeam(id)
+                .enqueue(object : retrofit2.Callback<DetailTeamResponse>{
+                    override fun onFailure(call: Call<DetailTeamResponse>?, t: Throwable?) {
+                        callback.onDataError()
+                    }
+
+                    override fun onResponse(call: Call<DetailTeamResponse>?, response: Response<DetailTeamResponse>?) {
+                        if (response!!.isSuccessful){
+                            Log.d("DETAIL TEAM ", GsonBuilder().setPrettyPrinting().create().toJson(response.body()))
+                            callback.onDataLoaded(response.body()!!)
+                        }else{
+                            callback.onDataError()
+                        }
+                    }
+
+                })
+
     }
 
 
