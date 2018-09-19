@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.anggitprayogo.footballapp.fotballapp.R
 import com.anggitprayogo.footballapp.fotballapp.config.Config
 import com.anggitprayogo.footballapp.fotballapp.model.detailevents.DetailEvent
@@ -19,10 +22,15 @@ class DetailEventLeagueActivity : AppCompatActivity(), DetailEventLeagueView{
 
     var detailevent: MutableList<DetailEvent> = mutableListOf()
     var idEvent: String = ""
+    var menuItem: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_event_league)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         idEvent = intent.getStringExtra(Config.LEAGUE_ID)
 
@@ -35,6 +43,27 @@ class DetailEventLeagueActivity : AppCompatActivity(), DetailEventLeagueView{
         swipe_refresh_layout.setOnRefreshListener {
             swipe_refresh_layout.isRefreshing = false
             presenter.getDetailMatch(idEvent)
+        }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail_activity, menu)
+        menuItem = menu
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId){
+            R.id.nav_favourite -> {
+                Toast.makeText(this, "Favourite", Toast.LENGTH_SHORT).show()
+               return true
+            }
+            R.id.home ->{
+                finish()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
 
     }
@@ -73,6 +102,8 @@ class DetailEventLeagueActivity : AppCompatActivity(), DetailEventLeagueView{
         tv_away_midfield.text = model.strAwayLineupMidfield
         tv_home_deffense.text = model.strHomeLineupDefense
         tv_away_deffense.text = model.strAwayLineupDefense
+        tv_home_forward.text = model.strHomeFormation
+        tv_away_forward.text = model.strAwayLineupForward
 
         presenter.getDetailHomeTeam(model.idHomeTeam)
         presenter.getDetailAwayTeam(model.idAwayTeam)

@@ -17,6 +17,8 @@
     <string name="goalskeeper">Goalkeeper</string>
     <string name="deffense">Defense</string>
     <string name="midfield">Midfield</string>
+    <string name="favorite">Favourite</string>
+    <string name="forward">Forward</string>
 
 
     <array name="league">
