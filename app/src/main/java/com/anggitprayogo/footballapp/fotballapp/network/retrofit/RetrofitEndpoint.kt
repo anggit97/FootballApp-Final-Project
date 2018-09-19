@@ -6,6 +6,7 @@ import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNext
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNextLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPast
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPastLeagueResponse
+import com.anggitprayogo.footballapp.fotballapp.model.player.PlayerResponse
 import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -31,6 +32,13 @@ interface RetrofitEndpoint {
     fun getTeams(@Query("l") league: String?): Call<TeamResponse>
     @GET("api/v1/json/1/lookupteam.php")
     fun getDetailTeam(@Query("id") id: String?): Call<DetailTeamResponse>
+
+    /**
+     * Mendapatkan data player
+     */
+    @GET("api/v1/json/1/lookup_all_players.php")
+    fun getTeamPlayer(@Query("id") idTeam:String?): Call<PlayerResponse>
+
 
 //    @GET("api/v1/json/1/searchevents.php")
 //    fun getListSearch(@Query("e")e:String): Call<ResponseSearch>

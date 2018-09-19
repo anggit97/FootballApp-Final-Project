@@ -18,6 +18,7 @@ import com.anggitprayogo.footballapp.fotballapp.model.detailteams.DetailTeam
 import com.anggitprayogo.footballapp.fotballapp.model.favourite.FavouriteEvent
 import com.anggitprayogo.footballapp.fotballapp.network.repository.MatchRepository
 import com.bumptech.glide.Glide
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_detail_event_league.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
@@ -120,7 +121,7 @@ class DetailEventLeagueActivity : AppCompatActivity(), DetailEventLeagueView{
         homeNameEvent = model.strHomeTeam
         awayNameEvent = model.strAwayTeam
         awayScoreEvent = model.intAwayScore
-        dateEvent = model.strEvent
+        dateEvent = model.strDate
         timeEvent = model.strTime
 
         tv_date.text = model.strDate
@@ -207,6 +208,8 @@ class DetailEventLeagueActivity : AppCompatActivity(), DetailEventLeagueView{
                                 "id" to idEvent)
                 val result = queryBuilder.parseList(classParser<FavouriteEvent>())
 
+                Log.d("RESULT : ", GsonBuilder().setPrettyPrinting().create().toJson(result))
+
                 favourite = !result.isEmpty()
                 setFavourite(favourite!!)
             }
@@ -236,7 +239,7 @@ class DetailEventLeagueActivity : AppCompatActivity(), DetailEventLeagueView{
 
         }catch (e: SQLiteConstraintException){
 
-            Toast.makeText(this, e?.message, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
 
         }
 
@@ -257,7 +260,7 @@ class DetailEventLeagueActivity : AppCompatActivity(), DetailEventLeagueView{
 
         }catch (e: SQLiteConstraintException){
 
-            Toast.makeText(this, e?.message, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
 
         }
 

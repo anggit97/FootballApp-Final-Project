@@ -5,6 +5,7 @@ import com.anggitprayogo.footballapp.fotballapp.model.detailevents.DetailEventLe
 import com.anggitprayogo.footballapp.fotballapp.model.detailteams.DetailTeamResponse
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNextLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPastLeagueResponse
+import com.anggitprayogo.footballapp.fotballapp.model.player.PlayerResponse
 import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
 import com.anggitprayogo.footballapp.fotballapp.network.retrofit.RetrofitEndpoint
 import com.anggitprayogo.footballapp.fotballapp.network.retrofit.RetrofitService
@@ -134,5 +135,26 @@ class MatchRepository {
 
     }
 
+
+    fun getPlayerTeam(id: String, callback: PlayerCallback<PlayerResponse>){
+
+        RetrofitService.createService(RetrofitEndpoint::class.java)
+                .getTeamPlayer(id)
+                .enqueue(object: retrofit2.Callback<PlayerResponse>{
+                    override fun onFailure(call: Call<PlayerResponse>?, t: Throwable?) {
+                        callback.onDataError()
+                    }
+
+                    override fun onResponse(call: Call<PlayerResponse>?, response: Response<PlayerResponse>?) {
+                        if (response!!.isSuccessful){
+                            Log.d("PLAYER : ", GsonBuilder().setPrettyPrinting().create().toJson(response.body()))
+                            callback.onDataLoaded(response.body()!!)
+                        }else{
+                            callback.onDataError()
+                        }
+                    }
+
+                })
+    }
 
 }

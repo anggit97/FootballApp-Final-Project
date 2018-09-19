@@ -93,7 +93,7 @@ class EventPastLeagueFragment : Fragment(), EventPastLeagueView {
                 }
 
                 Log.e("Tag", "spinner :" + teamsName)
-                presenter?.getPastEvent(teamsName)
+                presenter.getPastEvent(teamsName)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {

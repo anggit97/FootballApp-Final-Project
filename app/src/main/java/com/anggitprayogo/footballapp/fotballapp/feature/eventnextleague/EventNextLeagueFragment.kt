@@ -92,7 +92,7 @@ class EventNextLeagueFragment : Fragment(), EventNextLeagueView {
                 }
 
                 Log.e("Tag", "spinner :" + leagueId)
-                presenter?.getNextEvent(leagueId)
+                presenter.getNextEvent(leagueId)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {

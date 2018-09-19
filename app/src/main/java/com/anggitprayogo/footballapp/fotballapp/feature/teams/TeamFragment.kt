@@ -1,7 +1,5 @@
 package com.anggitprayogo.footballapp.fotballapp.feature.teams
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -19,10 +17,13 @@ import android.widget.Toast
 
 import com.anggitprayogo.footballapp.fotballapp.R
 import com.anggitprayogo.footballapp.fotballapp.adapter.TeamAdapter
+import com.anggitprayogo.footballapp.fotballapp.config.Config
+import com.anggitprayogo.footballapp.fotballapp.feature.detailteam.DetailTeamActivity
 import com.anggitprayogo.footballapp.fotballapp.model.teams.Team
 import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
 import com.anggitprayogo.footballapp.fotballapp.network.repository.MatchRepository
 import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.startActivity
 
 class TeamFragment : Fragment(), TeamView{
 
@@ -56,7 +57,10 @@ class TeamFragment : Fragment(), TeamView{
         recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recyclerView.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
         adapter = TeamAdapter(datas, {
-            Toast.makeText(activity, it.strTeam, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(activity, it.strTeam, Toast.LENGTH_SHORT).show()
+            startActivity<DetailTeamActivity>(
+                    Config.LEAGUE_ID to it.idTeam
+            )
         })
         recyclerView.adapter = adapter
 
@@ -119,4 +123,6 @@ class TeamFragment : Fragment(), TeamView{
     override fun onDataError() {
         Toast.makeText(activity, "Gagal fetch data team", Toast.LENGTH_LONG).show()
     }
+
+
 }

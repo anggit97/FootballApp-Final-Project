@@ -21,6 +21,8 @@
     <string name="forward">Forward</string>
     <string name="message_favourite_add_success">Berhasil menambahkan event ke dalam favourite</string>
     <string name="message_favourite_remove_success">Berhasil menghapus event dari favourite</string>
+    <string name="overview">Overview</string>
+    <string name="player">Player</string>
 
 
     <array name="league">

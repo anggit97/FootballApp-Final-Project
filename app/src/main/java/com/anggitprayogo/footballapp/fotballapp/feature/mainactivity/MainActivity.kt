@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), MainActivityView{
         //Selected listener pada nav bottom
         navigation_bottom.setOnNavigationItemSelectedListener{
 
-            var fragment: Fragment? = null
+            var fragment: Fragment?
 
             when(it.itemId){
                 R.id.nav_matches -> {
