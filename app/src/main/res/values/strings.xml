@@ -19,6 +19,8 @@
     <string name="midfield">Midfield</string>
     <string name="favorite">Favourite</string>
     <string name="forward">Forward</string>
+    <string name="message_favourite_add_success">Berhasil menambahkan event ke dalam favourite</string>
+    <string name="message_favourite_remove_success">Berhasil menghapus event dari favourite</string>
 
 
     <array name="league">
