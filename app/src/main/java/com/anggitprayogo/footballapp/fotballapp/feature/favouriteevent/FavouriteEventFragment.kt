@@ -1,8 +1,6 @@
 package com.anggitprayogo.footballapp.fotballapp.feature.favouriteevent
 
-import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -22,7 +20,6 @@ import com.anggitprayogo.footballapp.fotballapp.feature.detaileventleague.Detail
 import com.anggitprayogo.footballapp.fotballapp.model.favourite.FavouriteEvent
 import com.google.gson.GsonBuilder
 import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.rowParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
@@ -43,7 +40,7 @@ class FavouriteEventFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_favourite_event, container, false)
 
-        recyclerView = view.findViewById(R.id.rv_league)
+        recyclerView = view.findViewById(R.id.rv_league_2)
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout)
 
 

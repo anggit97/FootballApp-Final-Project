@@ -1,7 +1,5 @@
 package com.anggitprayogo.footballapp.fotballapp.feature.eventnextleague
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -15,14 +13,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 
 import com.anggitprayogo.footballapp.fotballapp.R
 import com.anggitprayogo.footballapp.fotballapp.adapter.EventNextLeagueAdapter
-import com.anggitprayogo.footballapp.fotballapp.adapter.EventPastLeagueAdapter
 import com.anggitprayogo.footballapp.fotballapp.config.Config
 import com.anggitprayogo.footballapp.fotballapp.feature.detaileventleague.DetailEventLeagueActivity
-import com.anggitprayogo.footballapp.fotballapp.feature.eventpastleague.EventPastLeaguePresenter
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNext
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNextLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.network.repository.MatchRepository
@@ -49,7 +44,7 @@ class EventNextLeagueFragment : Fragment(), EventNextLeagueView {
         val view = inflater.inflate(R.layout.fragment_event_next_league, container, false)
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout)
-        rvLeague = view.findViewById(R.id.rv_league)
+        rvLeague = view.findViewById(R.id.rv_league_2)
         spinner = view.findViewById(R.id.spn_league)
 
         val spinnerItems = resources.getStringArray(R.array.league)
