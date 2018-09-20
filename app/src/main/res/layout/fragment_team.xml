@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
+                app:contentInsetStart="0dp"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/Widget.AppCompat.Light.PopupMenu">
 
@@ -31,17 +32,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <com.arlib.floatingsearchview.FloatingSearchView
+                        android:visibility="gone"
+                        android:id="@+id/floating_search_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:floatingSearch_searchBarMarginLeft="0dp"
+                        app:floatingSearch_searchBarMarginTop="0dp"
+                        app:floatingSearch_searchBarMarginRight="0dp"
+                        app:floatingSearch_searchHint="Search team by name"
+                        app:floatingSearch_suggestionsListAnimDuration="250"
+                        app:floatingSearch_showSearchKey="false"
+                        app:floatingSearch_close_search_on_keyboard_dismiss="true"/>
 
                     <TextView
+                        android:visibility="visible"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
                         android:text="@string/app_name"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
-
                     <ImageView
+                        android:visibility="visible"
                         android:id="@+id/iv_search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

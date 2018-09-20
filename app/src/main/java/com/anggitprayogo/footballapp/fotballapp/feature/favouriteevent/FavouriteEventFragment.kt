@@ -53,7 +53,7 @@ class FavouriteEventFragment : Fragment() {
         adapter = FavouriteEventAdapter(datas, {
             Log.d(
                     "HASIL : ",
-                    "Nama Event : ${it.eventName}, Date : ${it.strDate}, Home Name : ${it.strHomeName}, " +
+                    "Nama SearchEvent : ${it.eventName}, Date : ${it.strDate}, Home Name : ${it.strHomeName}, " +
                             "Home Score : ${it.strHomeScore}, AwayScore : ${it.strAwayScore}, Away Name : ${it.strAwayScore}, " +
                             "TIME : ${it.strTime}"
             )
@@ -76,13 +76,6 @@ class FavouriteEventFragment : Fragment() {
             context?.database?.use {
                 val queryBuilder = select(FavouriteEvent.TABLE_FAVOURITE_EVENT)
                 val result = queryBuilder.parseList(classParser<FavouriteEvent>())
-//                val result = queryBuilder.parseList(parser = rowParser{
-//                    id: Long?, evenId: String?, evenTgl: String?, eventTime: String?,
-//                    homeName: String?, awayName: String?,
-//                    scoreHome: String?, scoreAway: String?,
-//                    eventName: String? ->
-//                    FavouriteEvent(id, evenId, eventName, homeName, awayName, scoreHome, scoreAway, evenTgl, eventTime)
-//                })
                 datas.addAll(result)
                 adapter.notifyDataSetChanged()
                 Log.d("RESULT : ", GsonBuilder().setPrettyPrinting().create().toJson(datas))

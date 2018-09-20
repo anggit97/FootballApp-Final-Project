@@ -7,6 +7,7 @@ import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNext
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPast
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPastLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.player.PlayerResponse
+import com.anggitprayogo.footballapp.fotballapp.model.searchevent.SearchEventResponse
 import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
 import com.kotlinje.submit2.model.detail_player.ResponseDetailPlayer
 import retrofit2.Call
@@ -43,29 +44,12 @@ interface RetrofitEndpoint {
     fun getDetailPlayer(@Query("id") idTeam:String?): Call<ResponseDetailPlayer>
 
 
-//    @GET("api/v1/json/1/searchevents.php")
-//    fun getListSearch(@Query("e")e:String): Call<ResponseSearch>
-//    // end point get team
-//    @GET("api/v1/json/1/lookupevent.php")
-//    fun getDataEachTeam(@Query("id")idEvent:String): Call<ResponseTeam>
-//    // end point get img team
-//    @GET("api/v1/json/1/lookupteam.php")
-//    fun getImgTeam(@Query("id") idTeam:String?): Call<ModelTeam>
-//
-//
-//    @GET("api/v1/json/1/searchteams.php")
-//    fun getSearchTeam(@Query("t") league: String?): Call<ResponseSearchTeam>
-//
-//    @GET("api/v1/json/1/lookupteam.php")
-//    fun getOneTeam(@Query("id") idTeam:String?): Call<TeamResponse>
-//
-//    @GET("api/v1/json/1/lookup_all_players.php")
-//    fun getTeamPlayer(@Query("id") idTeam:String?): Call<ResponsePlayer>
-//
-//    @GET("api/v1/json/1/lookupplayer.php")
-//    fun getDetailPlayer(@Query("id") idTeam:String?): Call<ResponseDetailPlayer>
-
-
-    //base url
+    /**
+     * Search
+     */
+    @GET("api/v1/json/1/searchteams.php")
+    fun getSearchTeam(@Query("t") league: String?): Call<TeamResponse>
+    @GET("api/v1/json/1/searchevents.php")
+    fun getSearchMatch(@Query("e")e:String): Call<SearchEventResponse>
 
 }

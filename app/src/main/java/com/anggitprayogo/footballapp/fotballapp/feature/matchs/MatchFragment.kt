@@ -13,6 +13,8 @@ import android.widget.ImageView
 
 import com.anggitprayogo.footballapp.fotballapp.R
 import com.anggitprayogo.footballapp.fotballapp.adapter.TabAdapter
+import com.anggitprayogo.footballapp.fotballapp.feature.searchmatch.SearchMatchActivity
+import org.jetbrains.anko.support.v4.startActivity
 
 
 class MatchFragment : Fragment(), MatchView{
@@ -55,6 +57,10 @@ class MatchFragment : Fragment(), MatchView{
             }
 
         })
+
+        ivSearch.setOnClickListener {
+            startActivity<SearchMatchActivity>()
+        }
 
         // Inflate the layout for this fragment
         return view

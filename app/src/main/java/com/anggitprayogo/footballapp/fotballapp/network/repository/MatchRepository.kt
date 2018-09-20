@@ -6,6 +6,7 @@ import com.anggitprayogo.footballapp.fotballapp.model.detailteams.DetailTeamResp
 import com.anggitprayogo.footballapp.fotballapp.model.eventsnextleague.EventNextLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.eventspastleague.EventPastLeagueResponse
 import com.anggitprayogo.footballapp.fotballapp.model.player.PlayerResponse
+import com.anggitprayogo.footballapp.fotballapp.model.searchevent.SearchEventResponse
 import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
 import com.anggitprayogo.footballapp.fotballapp.network.retrofit.RetrofitEndpoint
 import com.anggitprayogo.footballapp.fotballapp.network.retrofit.RetrofitService
@@ -177,6 +178,64 @@ class MatchRepository {
                     }
 
                 })
+    }
+
+
+    fun getSearchTeams(id: String, callbackLiga: SearchTeamCallback<TeamResponse?>) {
+        RetrofitService
+                .createService(RetrofitEndpoint::class.java)
+                .getSearchTeam(id)
+                .enqueue(object : retrofit2.Callback<TeamResponse> {
+                    override fun onFailure(call: Call<TeamResponse>?, t: Throwable?) {
+                        callbackLiga.onDataError()
+
+                    }
+
+                    override fun onResponse(call: Call<TeamResponse>?, response: Response<TeamResponse>?) {
+                        response.let {
+
+                            if (it!!.isSuccessful) {
+                                callbackLiga.onDataLoaded(it.body())
+
+                            } else {
+                                callbackLiga.onDataError()
+                            }
+                        }
+
+                    }
+
+
+                })
+
+    }
+
+    fun getSearchMatch(id: String, callback: SearchMatchCallback<SearchEventResponse?>) {
+        RetrofitService
+                .createService(RetrofitEndpoint::class.java)
+                .getSearchMatch(id)
+                .enqueue(object : retrofit2.Callback<SearchEventResponse> {
+                    override fun onFailure(call: Call<SearchEventResponse>?, t: Throwable?) {
+                        callback.onDataError()
+
+                    }
+
+                    override fun onResponse(call: Call<SearchEventResponse>?, response: Response<SearchEventResponse>?) {
+                        response.let {
+
+                            if (it!!.isSuccessful) {
+                                Log.e("RESULT : ",GsonBuilder().setPrettyPrinting().create().toJson(it.body()))
+                                callback.onDataLoaded(it.body())
+
+
+                            } else {
+                                Log.e("RESULT : ERROR","")
+                                callback.onDataError()
+                            }
+                        }
+
+                    }
+                })
+
     }
 
 }

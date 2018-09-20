@@ -1,9 +1,12 @@
 package com.anggitprayogo.footballapp.fotballapp.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import com.anggitprayogo.footballapp.fotballapp.R
@@ -12,7 +15,9 @@ import com.anggitprayogo.footballapp.fotballapp.model.teams.TeamResponse
 import com.bumptech.glide.Glide
 
 class TeamAdapter(val datas: List<Team>,
-                  val listener: (Team) -> Unit): RecyclerView.Adapter<TeamAdapter.ViewHolder>() {
+                  val listener: (Team) -> Unit): RecyclerView.Adapter<TeamAdapter.ViewHolder>(), Filterable {
+
+    var filterListResult: List<Team>? = null
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
@@ -44,4 +49,68 @@ class TeamAdapter(val datas: List<Team>,
     override fun onBindViewHolder(holder: TeamAdapter.ViewHolder, position: Int) {
         holder.bindItems(listener, datas.get(position))
     }
+
+    override fun getFilter(): Filter {
+//        return object : Filter(){
+//            override fun performFiltering(constraint: CharSequence?): FilterResults {
+//                val charSearch = constraint?.toString()
+//                Log.d("PERFORM NOT START", "")
+//                if (charSearch!!.isEmpty()){
+//                    filterListResult = datas
+//                    Log.d("PERFORM EMPTY", "")
+//                }else{
+//                    val resulList = ArrayList<Team>()
+//                    for (row in datas){
+//                        if (row!!.strTeam.toLowerCase().contains(charSearch.toLowerCase()))
+//                            resulList.add(row)
+//                    }
+//                    filterListResult = resulList
+//                }
+//
+//                val filterResults = Filter.FilterResults()
+//                filterResults.values =  filterListResult
+//                Log.d("PERFORM", "")
+//                return filterResults
+//            }
+//
+//            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+//                filterListResult = results!!.values as List<Team>
+//                Log.d("PUBLISH", "")
+//                notifyDataSetChanged()
+//            }
+//
+//        }
+        return RecyclerFilter()
+    }
+
+    inner class RecyclerFilter: Filter(){
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val charSearch = constraint?.toString()
+                Log.d("PERFORM NOT START", "")
+                if (charSearch!!.isEmpty()){
+                    filterListResult = datas
+                    Log.d("PERFORM EMPTY", "")
+                }else{
+                    val resulList = ArrayList<Team>()
+                    for (row in datas){
+                        if (row.strTeam.toLowerCase().contains(charSearch.toLowerCase()))
+                            resulList.add(row)
+                    }
+                    filterListResult = resulList
+                }
+
+                val filterResults = Filter.FilterResults()
+                filterResults.values =  filterListResult
+                Log.d("PERFORM", "")
+                return filterResults
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            filterListResult = results!!.values as List<Team>
+            Log.d("PUBLISH", "")
+            notifyDataSetChanged()
+        }
+
+    }
+
 }
